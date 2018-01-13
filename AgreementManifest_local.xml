@@ -4,11 +4,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:type="MailApp">
 
-  <Id>971E76EF-D73E-567F-ADAE-5A76B3905313</Id>
+  <Id>971E76EF-D73E-567F-ADAE-5A76B3905919</Id>
   <Version>1.0</Version>
   <ProviderName>Regioncom</ProviderName>
   <DefaultLocale>ru-ru</DefaultLocale>
-  <DisplayName DefaultValue="Согласование"/>
+  <DisplayName DefaultValue="Согласование локально"/>
   <Description DefaultValue="Согласование договоров через Outlook">
     
   </Description>

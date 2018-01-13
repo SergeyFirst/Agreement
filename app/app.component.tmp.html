@@ -1,23 +1,27 @@
 <div class="container">
-
     <div class="row">
-        <div class="col-xs-6">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" id="add-project-btn" (click)="addProject()">
-                    <span class="glyphicon glyphicon-plus" style="font-size: 16px;"></span>
-                    Добавить проект
-                </button>
-                <!--<button type="button" class="btn btn-default" id="remove-project-btn" (click)="removeProject()">
-                    <span class="glyphicon glyphicon-trash" style="font-size: 16px;"></span>
-                    Удалить проект
-                </button>-->
-            </div>
-        </div>
-        <div class="col-xs-3">
-        </div>
-        <div class="col-xs-3">
-            <input type="text" class="form-control" id="datepicker" placeholder="ДД.ММ.ГГГГ" [(ngModel)]="myDate" (ngModelChange)="onDateChange($event)">
-        </div>
+        <h3>Файлы</h3>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="5%">#</th>
+                    <th width="70%">Наименование</th>
+                    <th width="25%"></th>
+                </tr>
+            </thead>
+            <tbody id="projects-table">
+                <tr *ngFor="let doc of documents">
+                    <td>{{doc.id}}</td>
+                    <td>{{doc.name}}</td>
+                    <td><a href="{{doc.link}}" class="btn btn-default">Скачать</a></td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <h3>История согласования</h3>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -25,86 +29,38 @@
                 <thead>
                     <tr>
                         <th width="5%">#</th>
-                        <th width="10%">Код</th>
-                        <th width="55%">Проект</th>
-                        <th width="15%">Трудозатраты, ч</th>
-                        <th width="5%"></th>
-                        <th width="5%"></th>
-                        <th width="5%"></th>
+                        <th width="15%">Дата</th>
+                        <th width="30%">Автор</th>
+                        <th width="40%">Комментарий</th>
+                        <th width="15%">Статус</th>
                     </tr>
                 </thead>
                 <tbody id="projects-table">
-                    <tr *ngFor="let project of projects">
-                        <td>{{project.id}}</td>
-                        <td>{{project.code}}</td>
-                        <td>{{project.name}}</td>
-                        <td>
-                            <input type="number" min="0" max="24" class="form-control project-hours" [(ngModel)]="project.hours"
-                                (ngModelChange)="onHoursChange()">
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-sm add-comment" (click)="addComment(project.id - 1)"
-                                title="Добавить комментарий">
-                                <span class="glyphicon glyphicon-pencil" style="font-size: 16px;"></span>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-sm" (click)="removeProject(project.id - 1)" title="Удалить проект">
-                                <span class="glyphicon glyphicon-trash" style="font-size: 16px;"></span>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-sm" (click)="addProjectToFavorites(project.id - 1)"
-                                [ngClass]="{favorite: project.favorite}" title="Добавить в избранное">
-                                <span class="glyphicon glyphicon-star-empty" style="font-size: 16px;"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="pr-total" id="app-total">
-                        <td></td>
-                        <td></td>
-                        <td>Итого:</td>
-                        <td id="total-text">{{total}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let comment of comments">
+                        <td>{{comment.id}}</td>
+                        <td>{{comment.date}}</td>
+                        <td>{{comment.author}}</td>
+                        <td>{{comment.text}}</td>
+                        <td>{{comment.status}}</td>
                     </tr>
                 </tbody>
             </table>
-            <button type="submit" class="btn btn-default" id="submit-btn" (click)="saveProjects()">
-                <span class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></span>
-                Сохранить
-            </button>
         </div>
     </div>
-</div>
-
-<table id="timetable"></table>
-
-<div id="MyMessage"></div>
-
-<div id="project-dialog" title="Добавление проектов">
-    <!--<form role="form" id="all-projects-table">-->
-    <div *ngFor="let projectLine of projectsForSelection">
-        <label>{{projectLine.customer}}</label>
-        <div class="checkbox" *ngFor="let project of projectLine.projects">
-            <label>
-                <input type="checkbox" class="all-project-input" [(ngModel)]="project.checked">{{project.name}}></label>
-        </div>
+    <div class="row">
+        <h1>Комментарий</h1>
     </div>
-    <!--</form>-->
-</div>
-
-<div id="comment-dialog" title="Введите текст комментария">
-    <form role="form">
-        <input type="hidden" id="comment-id">
+    <div class="row">
         <textarea class="form-control" rows="3" id="comment-text"></textarea>
-    </form>
-</div>
-
-<div id="result-dialog" title="">
-    <p>
-        <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-        {{saveProjectResult}}
-    </p>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-default" id="submit-btn" (click)="agree()">
+            <span class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></span>
+            Согласовать
+        </button>
+        <button type="submit" class="btn btn-default" id="submit-btn" (click)="disagree()">
+            <span class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></span>
+            Отклонить
+        </button>
+    </div>
 </div>
