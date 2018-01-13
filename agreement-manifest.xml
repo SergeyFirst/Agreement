@@ -43,9 +43,6 @@
   <!-- To add more complex rules, add additional rule elements -->
   <Rule xsi:type="RuleCollection" Mode="And">
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
-    <Rule xsi:type="RuleCollection" Mode="And">
-      
-    </Rule>
   </Rule>
   <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
   <!-- E.g. To activate when a message contains an address -->
