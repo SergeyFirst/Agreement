@@ -11,6 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var comments_service_1 = require("./comments.service");
+var http_1 = require("@angular/http");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -19,11 +20,10 @@ var AppModule = /** @class */ (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent],
-            providers: [comments_service_1.CommentsService]
+            providers: [http_1.Http, comments_service_1.CommentsService]
         })
     ], AppModule);
     return AppModule;
 }());
 exports.AppModule = AppModule;
-console.log("Ok!");
 //# sourceMappingURL=app.module.js.map

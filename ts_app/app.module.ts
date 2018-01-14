@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent }   from './app.component';
 import { CommentsService }   from './comments.service';
+import { Http } from '@angular/http';
 @NgModule({
     imports:      [ BrowserModule, FormsModule ],
     declarations: [ AppComponent ],
     bootstrap:    [ AppComponent ],
-    providers:    [ CommentsService ]    
+    providers:    [ Http, CommentsService ]    
 })
 export class AppModule { }
-console.log("Ok!");
