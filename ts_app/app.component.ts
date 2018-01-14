@@ -38,10 +38,10 @@ export class AppComponent {
     }
     ngOnInit() {
         this.email = Office.context.mailbox.userProfile.emailAddress;
-        Office.context.mailbox.item.body.getAsync("text",,function cb(result){
+        Office.context.mailbox.item.body.getAsync("text","",function cb(result){
             if (result.status = "succeeded") {
                 this.body = result.value;
-                
+
                 this.commentsService.getComments("1").subscribe((data) => {
                     this.comments = data;
                 });

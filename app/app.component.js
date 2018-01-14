@@ -33,7 +33,7 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         this.email = Office.context.mailbox.userProfile.emailAddress;
-        Office.context.mailbox.item.body.getAsync("text", , function cb(result) {
+        Office.context.mailbox.item.body.getAsync("text", "", function cb(result) {
             var _this = this;
             if (result.status = "succeeded") {
                 this.body = result.value;

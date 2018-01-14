@@ -5,7 +5,7 @@ import { FormsModule }      from '@angular/forms';
 import { AppComponent }     from './app.component';
 import { CommentsService }  from './comments.service';
 @NgModule({
-    imports:      [ HttpModule, BrowserModule, FormsModule ],
+    imports:      [ BrowserModule, FormsModule, HttpModule ],
     declarations: [ AppComponent ],
     bootstrap:    [ AppComponent ],
     providers:    [ CommentsService ]    
