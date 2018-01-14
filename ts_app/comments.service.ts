@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+declare let $: any;
 
 @Injectable()
 export class CommentsService {
@@ -16,6 +17,7 @@ export class CommentsService {
     }
 
     getComments(id:string):Observable<Comment[]> {
+        
         return this.http.get(this.configData.commentsURL + id).map(res => res.json());
     }
 
