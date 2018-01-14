@@ -7,6 +7,7 @@ import { CommentsService }   from './comments.service';
     imports:      [ BrowserModule, FormsModule ],
     declarations: [ AppComponent ],
     bootstrap:    [ AppComponent ],
-    providers:    [ CommentsService ]
+    providers:    [ CommentsService ]    
 })
 export class AppModule { }
+console.log("Ok!");

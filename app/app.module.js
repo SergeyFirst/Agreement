@@ -25,4 +25,5 @@ var AppModule = /** @class */ (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
+console.log("Ok!");
 //# sourceMappingURL=app.module.js.map
