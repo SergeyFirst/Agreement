@@ -1,11 +1,11 @@
 import { NgModule }         from '@angular/core';
+import { HttpModule }       from '@angular/http';
 import { BrowserModule }    from '@angular/platform-browser';
 import { FormsModule }      from '@angular/forms';
 import { AppComponent }     from './app.component';
 import { CommentsService }  from './comments.service';
-import { HttpModule }       from '@angular/http';
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpModule ],
+    imports:      [ HttpModule, BrowserModule, FormsModule ],
     declarations: [ AppComponent ],
     bootstrap:    [ AppComponent ],
     providers:    [ CommentsService ]    
