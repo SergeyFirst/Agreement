@@ -33,9 +33,9 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         this.email = Office.context.mailbox.userProfile.emailAddress;
-        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Text, function cb(result) {
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.html, function cb(result) {
             var _this = this;
-            if (result.status = Office.AsyncResultStatus.Succeeded) {
+            if (result.status == Office.AsyncResultStatus.Succeeded) {
                 this.body = result.value;
                 this.commentsService.getComments("1").subscribe(function (data) {
                     _this.comments = data;
