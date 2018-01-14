@@ -17,7 +17,6 @@ export class CommentsService {
     }
 
     getComments(id:string):Observable<Comment[]> {
-        
         return this.http.get(this.configData.commentsURL + id).map(res => res.json());
     }
 

@@ -30,17 +30,20 @@ var AppComponent = /** @class */ (function () {
         this.commentsService = commentsService;
         this.documents = [];
         this.comments = [];
-        var formatter = new Intl.DateTimeFormat("ru");
-        this.email = Office.context.mailbox.userProfile.emailAddress;
-        this.body = Office.context.mailbox.item.body;
     }
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.commentsService.getComments("1").subscribe(function (data) {
-            _this.comments = data;
-        });
-        this.commentsService.getDocuments("1").subscribe(function (data) {
-            _this.documents = data;
+        this.email = Office.context.mailbox.userProfile.emailAddress;
+        Office.context.mailbox.item.body.getAsync("text", , function cb(result) {
+            var _this = this;
+            if (result.status = "succeeded") {
+                this.body = result.value;
+                this.commentsService.getComments("1").subscribe(function (data) {
+                    _this.comments = data;
+                });
+                this.commentsService.getDocuments("1").subscribe(function (data) {
+                    _this.documents = data;
+                });
+            }
         });
     };
     AppComponent.prototype.getProjectsData = function () {

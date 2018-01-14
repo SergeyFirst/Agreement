@@ -34,18 +34,25 @@ export class AppComponent {
     body: string;
 
     constructor(private commentsService: CommentsService) {
-        var formatter = new Intl.DateTimeFormat("ru");
-        this.email = Office.context.mailbox.userProfile.emailAddress;
-        this.body = Office.context.mailbox.item.body;
+        
     }
     ngOnInit() {
-        this.commentsService.getComments("1").subscribe((data) => {
-            this.comments = data;
+        this.email = Office.context.mailbox.userProfile.emailAddress;
+        Office.context.mailbox.item.body.getAsync("text",,function cb(result){
+            if (result.status = "succeeded") {
+                this.body = result.value;
+                
+                this.commentsService.getComments("1").subscribe((data) => {
+                    this.comments = data;
+                });
+        
+                this.commentsService.getDocuments("1").subscribe((data) => {
+                    this.documents = data;
+                });
+            }
         });
 
-        this.commentsService.getDocuments("1").subscribe((data) => {
-            this.documents = data;
-        });
+        
 
     }
     getProjectsData() {
