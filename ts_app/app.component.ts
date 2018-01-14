@@ -38,17 +38,20 @@ export class AppComponent {
     }
     ngOnInit() {
         this.email = Office.context.mailbox.userProfile.emailAddress;
-        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html,function cb(result){
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
                 this.body = result.value;
-
-                this.commentsService.getComments("1").subscribe((data) => {
-                    this.comments = data;
-                });
-        
-                this.commentsService.getDocuments("1").subscribe((data) => {
-                    this.documents = data;
-                });
+                var expr = /<div hidden="true" id="UUID">(.*)<\/div>/;
+                let UUID;
+                if((UUID = expr.exec(this.body)) !== null) {
+                    this.commentsService.getComments(UUID[1]).subscribe((data) => {
+                        this.comments = data;
+                    });
+            
+                    this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
+                        this.documents = data;
+                    });
+                }                
             }
         });
 

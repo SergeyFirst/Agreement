@@ -32,17 +32,21 @@ var AppComponent = /** @class */ (function () {
         this.comments = [];
     }
     AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.email = Office.context.mailbox.userProfile.emailAddress;
-        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function cb(result) {
-            var _this = this;
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function (result) {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
-                this.body = result.value;
-                this.commentsService.getComments("1").subscribe(function (data) {
-                    _this.comments = data;
-                });
-                this.commentsService.getDocuments("1").subscribe(function (data) {
-                    _this.documents = data;
-                });
+                _this.body = result.value;
+                var expr = /<div hidden="true" id="UUID">(.*)<\/div>/;
+                var UUID = void 0;
+                if ((UUID = expr.exec(_this.body)) !== null) {
+                    _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
+                        _this.comments = data;
+                    });
+                    _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
+                        _this.documents = data;
+                    });
+                }
             }
         });
     };
