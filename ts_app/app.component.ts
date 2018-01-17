@@ -43,7 +43,7 @@ export class AppComponent {
                 this.body = result.value;
                 var expr = /<div hidden="true" id="UUID">(.*)<\/div>/;
                 let UUID;
-                if((UUID = expr.exec(this.body)) !== null) {
+                //if((UUID = expr.exec(this.body)) !== null) {
                     this.commentsService.getComments(UUID[1]).subscribe((data) => {
                         this.comments = data;
                     });
@@ -51,7 +51,7 @@ export class AppComponent {
                     this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
                         this.documents = data;
                     });
-                }                
+                //}                
             }
         });
 

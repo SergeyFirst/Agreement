@@ -39,14 +39,14 @@ var AppComponent = /** @class */ (function () {
                 _this.body = result.value;
                 var expr = /<div hidden="true" id="UUID">(.*)<\/div>/;
                 var UUID = void 0;
-                if ((UUID = expr.exec(_this.body)) !== null) {
-                    _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
-                        _this.comments = data;
-                    });
-                    _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
-                        _this.documents = data;
-                    });
-                }
+                //if((UUID = expr.exec(this.body)) !== null) {
+                _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
+                    _this.comments = data;
+                });
+                _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
+                    _this.documents = data;
+                });
+                //}                
             }
         });
     };
