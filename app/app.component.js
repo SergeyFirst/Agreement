@@ -46,7 +46,8 @@ var AppComponent = /** @class */ (function () {
                 _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
                     _this.documents = data;
                 });
-                //}                
+                //}
+                console.log("Ok");
             }
         });
     };

@@ -51,7 +51,8 @@ export class AppComponent {
                     this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
                         this.documents = data;
                     });
-                //}                
+                //}
+                console.log("Ok");
             }
         });
 
