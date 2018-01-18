@@ -34,9 +34,6 @@ export class AppComponent {
     body: string;
 
     constructor(private commentsService: CommentsService) {
-        
-    }
-    ngOnInit() {
         this.email = Office.context.mailbox.userProfile.emailAddress;
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
@@ -55,6 +52,9 @@ export class AppComponent {
                 
             }
         });
+    }
+    ngOnInit() {
+        
 
         
 

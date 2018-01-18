@@ -27,12 +27,10 @@ var Comment = /** @class */ (function () {
 exports.Comment = Comment;
 var AppComponent = /** @class */ (function () {
     function AppComponent(commentsService) {
+        var _this = this;
         this.commentsService = commentsService;
         this.documents = [];
         this.comments = [];
-    }
-    AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.email = Office.context.mailbox.userProfile.emailAddress;
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function (result) {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
@@ -49,6 +47,8 @@ var AppComponent = /** @class */ (function () {
                 }
             }
         });
+    }
+    AppComponent.prototype.ngOnInit = function () {
     };
     AppComponent.prototype.getProjectsData = function () {
         this.lockForm();
