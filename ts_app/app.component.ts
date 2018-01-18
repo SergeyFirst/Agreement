@@ -41,9 +41,9 @@ export class AppComponent {
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
                 this.body = result.value;
-                var expr = /<div hidden="true" id="UUID">(.*)<\/div>/;
+                var expr = /\[UUID=(.*)\]/;
                 let UUID;
-                //if((UUID = expr.exec(this.body)) !== null) {
+                if((UUID = expr.exec(this.body)) !== null) {
                     this.commentsService.getComments(UUID[1]).subscribe((data) => {
                         this.comments = data;
                     });
@@ -51,7 +51,7 @@ export class AppComponent {
                     this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
                         this.documents = data;
                     });
-                //}
+                }
                 console.log("Ok");
             }
         });

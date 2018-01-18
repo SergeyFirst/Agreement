@@ -37,16 +37,16 @@ var AppComponent = /** @class */ (function () {
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function (result) {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
                 _this.body = result.value;
-                var expr = /<div hidden="true" id="UUID">(.*)<\/div>/;
+                var expr = /\[UUID=(.*)\]/;
                 var UUID = void 0;
-                //if((UUID = expr.exec(this.body)) !== null) {
-                _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
-                    _this.comments = data;
-                });
-                _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
-                    _this.documents = data;
-                });
-                //}
+                if ((UUID = expr.exec(_this.body)) !== null) {
+                    _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
+                        _this.comments = data;
+                    });
+                    _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
+                        _this.documents = data;
+                    });
+                }
                 console.log("Ok");
             }
         });
