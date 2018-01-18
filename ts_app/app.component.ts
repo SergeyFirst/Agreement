@@ -45,7 +45,7 @@ export class AppComponent {
     email: string;
     body: string;
 
-    constructor(private commentsService: CommentsService) {
+    constructor(private commentsService: CommentsService, private ref: ChangeDetectorRef) {
         this.email = Office.context.mailbox.userProfile.emailAddress;
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
@@ -54,11 +54,17 @@ export class AppComponent {
                 let UUID;
                 if ((UUID = expr.exec(this.body)) !== null) {
                     this.commentsService.getComments(UUID[1]).subscribe((data) => {
-                        data.forEach((val, ind, arr) => { this.comments.push(new Comment(val)) })
+                        for(var i=0;i<data.length;i++){
+                            this.comments.push(new Comment(data[i]))
+                        }
+                        this.ref.detectChanges();
                     });
 
                     this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
-                        data.forEach((val, ind, arr) => { this.documents.push(new Document(val)) })
+                        for(var i=0;i<data.length;i++){
+                            this.documents.push(new Document(data[i]));
+                        }
+                        this.ref.detectChanges();
                     });
                 }
 

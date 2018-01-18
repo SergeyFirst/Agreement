@@ -34,9 +34,10 @@ var Comment = /** @class */ (function () {
 }());
 exports.Comment = Comment;
 var AppComponent = /** @class */ (function () {
-    function AppComponent(commentsService) {
+    function AppComponent(commentsService, ref) {
         var _this = this;
         this.commentsService = commentsService;
+        this.ref = ref;
         this.documents = [];
         this.comments = [];
         this.email = Office.context.mailbox.userProfile.emailAddress;
@@ -47,10 +48,16 @@ var AppComponent = /** @class */ (function () {
                 var UUID = void 0;
                 if ((UUID = expr.exec(_this.body)) !== null) {
                     _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
-                        data.forEach(function (val, ind, arr) { _this.comments.push(new Comment(val)); });
+                        for (var i = 0; i < data.length; i++) {
+                            _this.comments.push(new Comment(data[i]));
+                        }
+                        _this.ref.detectChanges();
                     });
                     _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
-                        data.forEach(function (val, ind, arr) { _this.documents.push(new Document(val)); });
+                        for (var i = 0; i < data.length; i++) {
+                            _this.documents.push(new Document(data[i]));
+                        }
+                        _this.ref.detectChanges();
                     });
                 }
             }
@@ -88,7 +95,7 @@ var AppComponent = /** @class */ (function () {
             selector: 'my-app',
             templateUrl: './app/app.component.tmp.html',
         }),
-        __metadata("design:paramtypes", [comments_service_1.CommentsService])
+        __metadata("design:paramtypes", [comments_service_1.CommentsService, core_1.ChangeDetectorRef])
     ], AppComponent);
     return AppComponent;
 }());
