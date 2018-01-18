@@ -52,7 +52,7 @@ export class AppComponent {
                         this.documents = data;
                     });
                 }
-                console.log("Ok");
+                
             }
         });
 

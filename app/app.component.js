@@ -47,7 +47,6 @@ var AppComponent = /** @class */ (function () {
                         _this.documents = data;
                     });
                 }
-                console.log("Ok");
             }
         });
     };
