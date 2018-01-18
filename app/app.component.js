@@ -14,13 +14,21 @@ var comments_service_1 = require("./comments.service");
 var core_2 = require("@angular/core");
 core_2.enableProdMode();
 var Document = /** @class */ (function () {
-    function Document() {
+    function Document(data) {
+        this.id = data.id;
+        this.name = data.name;
+        this.link = data.link;
     }
     return Document;
 }());
 exports.Document = Document;
 var Comment = /** @class */ (function () {
-    function Comment() {
+    function Comment(data) {
+        this.id = data.id;
+        this.date = data.date;
+        this.author = data.author;
+        this.text = data.text;
+        this.status = data.status;
     }
     return Comment;
 }());
@@ -39,10 +47,10 @@ var AppComponent = /** @class */ (function () {
                 var UUID = void 0;
                 if ((UUID = expr.exec(_this.body)) !== null) {
                     _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
-                        _this.comments = data;
+                        data.forEach(function (val, ind, arr) { _this.comments.push(new Comment(val)); });
                     });
                     _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
-                        _this.documents = data;
+                        data.forEach(function (val, ind, arr) { _this.documents.push(new Document(val)); });
                     });
                 }
             }

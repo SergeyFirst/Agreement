@@ -11,6 +11,11 @@ export class Document {
     id: number;
     name: string;
     link: string;
+    constructor(data) {
+        this.id = data.id;
+        this.name = data.name;
+        this.link = data.link;
+    }
 }
 
 export class Comment {
@@ -19,6 +24,13 @@ export class Comment {
     author: string;
     text: string;
     status: string;
+    constructor(data: any) {
+        this.id = data.id;
+        this.date = data.date;
+        this.author = data.author;
+        this.text = data.text;
+        this.status = data.status;
+    }
 }
 
 @Component({
@@ -40,29 +52,29 @@ export class AppComponent {
                 this.body = result.value;
                 var expr = /\[UUID=(.*)\]/;
                 let UUID;
-                if((UUID = expr.exec(this.body)) !== null) {
+                if ((UUID = expr.exec(this.body)) !== null) {
                     this.commentsService.getComments(UUID[1]).subscribe((data) => {
-                        this.comments = data;
+                        data.forEach((val, ind, arr) => { this.comments.push(new Comment(val)) })
                     });
-            
+
                     this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
-                        this.documents = data;
+                        data.forEach((val, ind, arr) => { this.documents.push(new Document(val)) })
                     });
                 }
-                
+
             }
         });
     }
     ngOnInit() {
-        
 
-        
+
+
 
     }
     getProjectsData() {
         this.lockForm();
 
-        
+
 
 
     }
