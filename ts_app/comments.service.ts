@@ -16,12 +16,12 @@ export class CommentsService {
         this.configData = new ConfigData;
     }
 
-    getComments(id:string):Observable<Comment[]> {
-        return this.http.get(this.configData.commentsURL + id).map(res => res.json());
+    getComments(id:string, email:string):Observable<Comment[]> {
+        return this.http.get(this.configData.commentsURL + id + "\\" + email).map(res => res.json());
     }
 
-    getDocuments(id:string):Observable<Document[]> {
-        return this.http.get(this.configData.documentsURL + id).map(res => res.json());
+    getDocuments(id:string, email:string):Observable<Document[]> {
+        return this.http.get(this.configData.documentsURL + id + "\\" + email).map(res => res.json());
     }
 
     

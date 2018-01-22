@@ -18,11 +18,11 @@ var CommentsService = /** @class */ (function () {
         this.http = http;
         this.configData = new config_1.ConfigData;
     }
-    CommentsService.prototype.getComments = function (id) {
-        return this.http.get(this.configData.commentsURL + id).map(function (res) { return res.json(); });
+    CommentsService.prototype.getComments = function (id, email) {
+        return this.http.get(this.configData.commentsURL + id + "\\" + email).map(function (res) { return res.json(); });
     };
-    CommentsService.prototype.getDocuments = function (id) {
-        return this.http.get(this.configData.documentsURL + id).map(function (res) { return res.json(); });
+    CommentsService.prototype.getDocuments = function (id, email) {
+        return this.http.get(this.configData.documentsURL + id + "\\" + email).map(function (res) { return res.json(); });
     };
     CommentsService = __decorate([
         core_1.Injectable(),

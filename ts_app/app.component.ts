@@ -53,14 +53,14 @@ export class AppComponent {
                 var expr = /\[UUID=(.*)\]/;
                 let UUID;
                 if ((UUID = expr.exec(this.body)) !== null) {
-                    this.commentsService.getComments(UUID[1]).subscribe((data) => {
+                    this.commentsService.getComments(UUID[1], this.email).subscribe((data) => {
                         for(var i=0;i<data.length;i++){
                             this.comments.push(new Comment(data[i]))
                         }
                         this.ref.detectChanges();
                     });
 
-                    this.commentsService.getDocuments(UUID[1]).subscribe((data) => {
+                    this.commentsService.getDocuments(UUID[1], this.email).subscribe((data) => {
                         for(var i=0;i<data.length;i++){
                             this.documents.push(new Document(data[i]));
                         }

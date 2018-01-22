@@ -47,13 +47,13 @@ var AppComponent = /** @class */ (function () {
                 var expr = /\[UUID=(.*)\]/;
                 var UUID = void 0;
                 if ((UUID = expr.exec(_this.body)) !== null) {
-                    _this.commentsService.getComments(UUID[1]).subscribe(function (data) {
+                    _this.commentsService.getComments(UUID[1], _this.email).subscribe(function (data) {
                         for (var i = 0; i < data.length; i++) {
                             _this.comments.push(new Comment(data[i]));
                         }
                         _this.ref.detectChanges();
                     });
-                    _this.commentsService.getDocuments(UUID[1]).subscribe(function (data) {
+                    _this.commentsService.getDocuments(UUID[1], _this.email).subscribe(function (data) {
                         for (var i = 0; i < data.length; i++) {
                             _this.documents.push(new Document(data[i]));
                         }
