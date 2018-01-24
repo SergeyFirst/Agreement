@@ -27,12 +27,18 @@ export class CommentsService {
     isAgreementAvailable(id:string, email:string):Observable<boolean> {
         return this.http.get(this.configData.isAgreementAvailableURL + id + "\\" + email).map(res => res.json());
     }
-    agree(id:string, email:string):Observable<boolean> {
-        return this.http.get(this.configData.agreeURL + id + "\\" + email).map(res => res.json());
+    agree(id:string, email:string, comment:string):Observable<boolean> {
+        let jdoc = '{"id": "' + id + '"' +
+                   ' "email": "' + email + '"' + 
+                   ' "comment": "' + comment + '"}';
+        return this.http.post(this.configData.agreeURL, jdoc).map(res => res.json());
     }
 
-    disagree(id:string, email:string):Observable<boolean> {
-        return this.http.get(this.configData.disagreeURL + id + "\\" + email).map(res => res.json());
+    disagree(id:string, email:string, comment:string):Observable<boolean> {
+        let jdoc = '{"id": "' + id + '"' +
+                   ' "email": "' + email + '"' + 
+                   ' "comment": "' + comment + '"}';
+        return this.http.post(this.configData.disagreeURL, jdoc).map(res => res.json());
     }
     
 }

@@ -27,11 +27,17 @@ var CommentsService = /** @class */ (function () {
     CommentsService.prototype.isAgreementAvailable = function (id, email) {
         return this.http.get(this.configData.isAgreementAvailableURL + id + "\\" + email).map(function (res) { return res.json(); });
     };
-    CommentsService.prototype.agree = function (id, email) {
-        return this.http.get(this.configData.agreeURL + id + "\\" + email).map(function (res) { return res.json(); });
+    CommentsService.prototype.agree = function (id, email, comment) {
+        var jdoc = '{"id": "' + id + '"' +
+            ' "email": "' + email + '"' +
+            ' "comment": "' + comment + '"}';
+        return this.http.post(this.configData.agreeURL, jdoc).map(function (res) { return res.json(); });
     };
-    CommentsService.prototype.disagree = function (id, email) {
-        return this.http.get(this.configData.disagreeURL + id + "\\" + email).map(function (res) { return res.json(); });
+    CommentsService.prototype.disagree = function (id, email, comment) {
+        var jdoc = '{"id": "' + id + '"' +
+            ' "email": "' + email + '"' +
+            ' "comment": "' + comment + '"}';
+        return this.http.post(this.configData.disagreeURL, jdoc).map(function (res) { return res.json(); });
     };
     CommentsService = __decorate([
         core_1.Injectable(),
