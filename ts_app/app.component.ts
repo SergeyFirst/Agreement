@@ -42,6 +42,7 @@ export class Comment {
 export class AppComponent {
     documents: Document[] = [];
     comments: Comment[] = [];
+    comment: string;
     email: string;
     body: string;
     UUID: string;
@@ -97,7 +98,7 @@ export class AppComponent {
 
 
     agree() {
-        this.commentsService.agree(this.UUID, this.email).subscribe((agree) => {
+        this.commentsService.agree(this.UUID, this.email, this.comment).subscribe((agree) => {
             if (agree) {                
                 this.lockForm();
                 this.getComments();
@@ -106,7 +107,7 @@ export class AppComponent {
     }
 
     disagree() {
-        this.commentsService.disagree(this.UUID, this.email).subscribe((disagree) => {
+        this.commentsService.disagree(this.UUID, this.email, this.comment).subscribe((disagree) => {
             if (disagree) {                
                 this.lockForm();
                 this.getComments();

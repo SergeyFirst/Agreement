@@ -51,7 +51,7 @@
         <h1>Комментарий</h1>
     </div>
     <div class="row">
-        <textarea class="form-control" rows="3" id="comment-text"></textarea>
+        <textarea class="form-control" rows="3" id="comment-text" [(ngModel)]="comment"></textarea>
     </div>
     <div class="row" id="agreement_row">
         <button type="submit" class="btn btn-default" id="submit-btn" (click)="agree()">

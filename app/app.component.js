@@ -88,7 +88,7 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.agree = function () {
         var _this = this;
-        this.commentsService.agree(this.UUID, this.email).subscribe(function (agree) {
+        this.commentsService.agree(this.UUID, this.email, this.comment).subscribe(function (agree) {
             if (agree) {
                 _this.lockForm();
                 _this.getComments();
@@ -97,7 +97,7 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.disagree = function () {
         var _this = this;
-        this.commentsService.disagree(this.UUID, this.email).subscribe(function (disagree) {
+        this.commentsService.disagree(this.UUID, this.email, this.comment).subscribe(function (disagree) {
             if (disagree) {
                 _this.lockForm();
                 _this.getComments();
