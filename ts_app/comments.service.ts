@@ -24,5 +24,15 @@ export class CommentsService {
         return this.http.get(this.configData.documentsURL + id + "\\" + email).map(res => res.json());
     }
 
+    isAgreementAvailable(id:string, email:string):Observable<boolean> {
+        return this.http.get(this.configData.isAgreementAvailableURL + id + "\\" + email).map(res => res.json());
+    }
+    agree(id:string, email:string):Observable<boolean> {
+        return this.http.get(this.configData.agreeURL + id + "\\" + email).map(res => res.json());
+    }
+
+    disagree(id:string, email:string):Observable<boolean> {
+        return this.http.get(this.configData.disagreeURL + id + "\\" + email).map(res => res.json());
+    }
     
 }

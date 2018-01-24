@@ -24,6 +24,15 @@ var CommentsService = /** @class */ (function () {
     CommentsService.prototype.getDocuments = function (id, email) {
         return this.http.get(this.configData.documentsURL + id + "\\" + email).map(function (res) { return res.json(); });
     };
+    CommentsService.prototype.isAgreementAvailable = function (id, email) {
+        return this.http.get(this.configData.isAgreementAvailableURL + id + "\\" + email).map(function (res) { return res.json(); });
+    };
+    CommentsService.prototype.agree = function (id, email) {
+        return this.http.get(this.configData.agreeURL + id + "\\" + email).map(function (res) { return res.json(); });
+    };
+    CommentsService.prototype.disagree = function (id, email) {
+        return this.http.get(this.configData.disagreeURL + id + "\\" + email).map(function (res) { return res.json(); });
+    };
     CommentsService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])

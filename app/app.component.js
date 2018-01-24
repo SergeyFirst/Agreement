@@ -35,60 +35,80 @@ var Comment = /** @class */ (function () {
 exports.Comment = Comment;
 var AppComponent = /** @class */ (function () {
     function AppComponent(commentsService, ref) {
-        var _this = this;
         this.commentsService = commentsService;
         this.ref = ref;
         this.documents = [];
         this.comments = [];
         this.email = Office.context.mailbox.userProfile.emailAddress;
+    }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.lockForm();
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function (result) {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
                 _this.body = result.value;
                 var expr = /\[UUID=(.*)\]/;
                 var UUID = void 0;
                 if ((UUID = expr.exec(_this.body)) !== null) {
-                    _this.commentsService.getComments(UUID[1], _this.email).subscribe(function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            _this.comments.push(new Comment(data[i]));
-                        }
-                        _this.ref.detectChanges();
-                    });
-                    _this.commentsService.getDocuments(UUID[1], _this.email).subscribe(function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            _this.documents.push(new Document(data[i]));
-                        }
-                        _this.ref.detectChanges();
-                    });
+                    _this.UUID = UUID[1];
+                    _this.getComments();
+                    _this.getDocuments();
+                    _this.checkIsAgreementAvailable();
                 }
             }
         });
-    }
-    AppComponent.prototype.ngOnInit = function () {
     };
-    AppComponent.prototype.getProjectsData = function () {
-        this.lockForm();
+    AppComponent.prototype.getComments = function () {
+        var _this = this;
+        this.comments = [];
+        this.commentsService.getComments(this.UUID, this.email).subscribe(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                _this.comments.push(new Comment(data[i]));
+            }
+            _this.ref.detectChanges();
+        });
+    };
+    AppComponent.prototype.getDocuments = function () {
+        var _this = this;
+        this.documents = [];
+        this.commentsService.getDocuments(this.UUID, this.email).subscribe(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                _this.documents.push(new Document(data[i]));
+            }
+            _this.ref.detectChanges();
+        });
+    };
+    AppComponent.prototype.checkIsAgreementAvailable = function () {
+        var _this = this;
+        this.commentsService.isAgreementAvailable(this.UUID, this.email).subscribe(function (data) {
+            if (data) {
+                _this.unlockForm();
+            }
+        });
     };
     AppComponent.prototype.agree = function () {
+        var _this = this;
+        this.commentsService.agree(this.UUID, this.email).subscribe(function (agree) {
+            if (agree) {
+                _this.lockForm();
+                _this.getComments();
+            }
+        });
     };
     AppComponent.prototype.disagree = function () {
+        var _this = this;
+        this.commentsService.disagree(this.UUID, this.email).subscribe(function (disagree) {
+            if (disagree) {
+                _this.lockForm();
+                _this.getComments();
+            }
+        });
     };
     AppComponent.prototype.lockForm = function () {
-        //$("#submit-btn").attr("disabled", "disabled");
-        //$("#datepicker").attr("disabled", "disabled");
-        //$("#add-project-btn").attr("disabled", "disabled");
-        //$("#remove-project-btn").attr("disabled", "disabled");
-        //$(".project-checked").attr("disabled", "disabled");
-        //$(".project-hours").attr("disabled", "disabled");
-        //$(".add-comment").attr("disabled", "disabled");
+        $("#agreement_row").attr("disabled", "disabled");
     };
     AppComponent.prototype.unlockForm = function () {
-        //$("#submit-btn").attr("disabled", false);
-        //$("#datepicker").attr("disabled", false);
-        //$("#add-project-btn").attr("disabled", false);
-        //$("#remove-project-btn").attr("disabled", false);
-        //$(".project-checked").attr("disabled", false);
-        //$(".project-hours").attr("disabled", false);
-        //$(".add-comment").attr("disabled", false);
+        $("#agreement_row").attr("disabled", false);
     };
     AppComponent = __decorate([
         core_1.Component({

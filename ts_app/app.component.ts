@@ -44,73 +44,82 @@ export class AppComponent {
     comments: Comment[] = [];
     email: string;
     body: string;
+    UUID: string;
 
     constructor(private commentsService: CommentsService, private ref: ChangeDetectorRef) {
         this.email = Office.context.mailbox.userProfile.emailAddress;
+    }
+    ngOnInit() {
+        this.lockForm();
         Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
             if (result.status == Office.AsyncResultStatus.Succeeded) {
                 this.body = result.value;
                 var expr = /\[UUID=(.*)\]/;
                 let UUID;
                 if ((UUID = expr.exec(this.body)) !== null) {
-                    this.commentsService.getComments(UUID[1], this.email).subscribe((data) => {
-                        for(var i=0;i<data.length;i++){
-                            this.comments.push(new Comment(data[i]))
-                        }
-                        this.ref.detectChanges();
-                    });
-
-                    this.commentsService.getDocuments(UUID[1], this.email).subscribe((data) => {
-                        for(var i=0;i<data.length;i++){
-                            this.documents.push(new Document(data[i]));
-                        }
-                        this.ref.detectChanges();
-                    });
+                    this.UUID = UUID[1];
+                    this.getComments();
+                    this.getDocuments();
+                    this.checkIsAgreementAvailable();
                 }
 
             }
+        });        
+    }
+
+    getComments() {
+        this.comments = [];
+        this.commentsService.getComments(this.UUID, this.email).subscribe((data) => {
+            for(var i=0;i<data.length;i++){
+                this.comments.push(new Comment(data[i]))
+            }
+            this.ref.detectChanges();
         });
     }
-    ngOnInit() {
 
-
-
-
+    getDocuments() {
+        this.documents = [];
+        this.commentsService.getDocuments(this.UUID, this.email).subscribe((data) => {
+            for(var i=0;i<data.length;i++){
+                this.documents.push(new Document(data[i]));
+            }
+            this.ref.detectChanges();
+        });
     }
-    getProjectsData() {
-        this.lockForm();
 
-
-
-
+    checkIsAgreementAvailable() {
+        this.commentsService.isAgreementAvailable(this.UUID, this.email).subscribe((data) => {
+            if (data) {
+                this.unlockForm();
+            }
+        });
     }
+
 
     agree() {
-
+        this.commentsService.agree(this.UUID, this.email).subscribe((agree) => {
+            if (agree) {                
+                this.lockForm();
+                this.getComments();
+            }
+        });
     }
 
     disagree() {
-
+        this.commentsService.disagree(this.UUID, this.email).subscribe((disagree) => {
+            if (disagree) {                
+                this.lockForm();
+                this.getComments();
+            }
+        });
     }
 
     lockForm() {
-        //$("#submit-btn").attr("disabled", "disabled");
-        //$("#datepicker").attr("disabled", "disabled");
-        //$("#add-project-btn").attr("disabled", "disabled");
-        //$("#remove-project-btn").attr("disabled", "disabled");
-        //$(".project-checked").attr("disabled", "disabled");
-        //$(".project-hours").attr("disabled", "disabled");
-        //$(".add-comment").attr("disabled", "disabled");
+        $("#agreement_row").attr("disabled", "disabled");        
     }
 
     unlockForm() {
-        //$("#submit-btn").attr("disabled", false);
-        //$("#datepicker").attr("disabled", false);
-        //$("#add-project-btn").attr("disabled", false);
-        //$("#remove-project-btn").attr("disabled", false);
-        //$(".project-checked").attr("disabled", false);
-        //$(".project-hours").attr("disabled", false);
-        //$(".add-comment").attr("disabled", false);
+        $("#agreement_row").attr("disabled", false);
     }
 
 }
