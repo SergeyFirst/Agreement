@@ -1,4 +1,5 @@
 node_modules/
+.idea
 .vscode
 ts_app/config.ts
 app/config.js

@@ -8,12 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var comments_service_1 = require("./comments.service");
 var core_2 = require("@angular/core");
 core_2.enableProdMode();
-var Document = /** @class */ (function () {
+var Document = (function () {
     function Document(data) {
         this.id = data.id;
         this.name = data.name;
@@ -22,7 +21,7 @@ var Document = /** @class */ (function () {
     return Document;
 }());
 exports.Document = Document;
-var Comment = /** @class */ (function () {
+var Comment = (function () {
     function Comment(data) {
         this.id = data.id;
         this.date = data.date;
@@ -33,7 +32,7 @@ var Comment = /** @class */ (function () {
     return Comment;
 }());
 exports.Comment = Comment;
-var AppComponent = /** @class */ (function () {
+var AppComponent = (function () {
     function AppComponent(commentsService, ref) {
         this.commentsService = commentsService;
         this.ref = ref;
@@ -110,14 +109,14 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.unlockForm = function () {
         $("#agreement_row").attr("disabled", false);
     };
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            templateUrl: './app/app.component.tmp.html',
-        }),
-        __metadata("design:paramtypes", [comments_service_1.CommentsService, core_1.ChangeDetectorRef])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'my-app',
+        templateUrl: './app/app.component.tmp.html',
+    }),
+    __metadata("design:paramtypes", [comments_service_1.CommentsService, core_1.ChangeDetectorRef])
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

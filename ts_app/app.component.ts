@@ -36,8 +36,6 @@ export class Comment {
 @Component({
     selector: 'my-app',
     templateUrl: './app/app.component.tmp.html',
-    //styles: [`.favorite{background-color: #e0e0eb; border-color: #e0e0eb;}`],
-    //providers: [ProjectService, ProjectForSelectionService, SaveProjectsService]
 })
 export class AppComponent {
     documents: Document[] = [];
