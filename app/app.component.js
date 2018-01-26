@@ -38,6 +38,7 @@ var AppComponent = (function () {
         this.ref = ref;
         this.documents = [];
         this.comments = [];
+        this.comment = "";
         this.email = Office.context.mailbox.userProfile.emailAddress;
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -104,10 +105,14 @@ var AppComponent = (function () {
         });
     };
     AppComponent.prototype.lockForm = function () {
-        $("#agreement_row").attr("disabled", true);
+        $("#comment-text").attr("disabled", true);
+        $("#agree-btn").attr("disabled", true);
+        $("#disagree-btn").attr("disabled", true);
     };
     AppComponent.prototype.unlockForm = function () {
-        $("#agreement_row").attr("disabled", false);
+        $("#comment-text").attr("disabled", false);
+        $("#agree-btn").attr("disabled", false);
+        $("#disagree-btn").attr("disabled", false);
     };
     return AppComponent;
 }());

@@ -40,7 +40,7 @@ export class Comment {
 export class AppComponent {
     documents: Document[] = [];
     comments: Comment[] = [];
-    comment: string;
+    comment: string = "";
     email: string;
     body: string;
     UUID: string;
@@ -114,11 +114,16 @@ export class AppComponent {
     }
 
     lockForm() {
-        $("#agreement_row").attr("disabled", true);
+        $("#comment-text").attr("disabled", true);
+        $("#agree-btn").attr("disabled", true);
+        $("#disagree-btn").attr("disabled", true);
+
     }
 
     unlockForm() {
-        $("#agreement_row").attr("disabled", false);
+        $("#comment-text").attr("disabled", false);
+        $("#agree-btn").attr("disabled", false);
+        $("#disagree-btn").attr("disabled", false);
     }
 
 }
