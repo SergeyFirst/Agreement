@@ -104,7 +104,7 @@ var AppComponent = (function () {
         });
     };
     AppComponent.prototype.lockForm = function () {
-        $("#agreement_row").attr("disabled", "disabled");
+        $("#agreement_row").attr("disabled", true);
     };
     AppComponent.prototype.unlockForm = function () {
         $("#agreement_row").attr("disabled", false);

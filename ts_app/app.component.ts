@@ -114,7 +114,7 @@ export class AppComponent {
     }
 
     lockForm() {
-        $("#agreement_row").attr("disabled", "disabled");        
+        $("#agreement_row").attr("disabled", true);
     }
 
     unlockForm() {
