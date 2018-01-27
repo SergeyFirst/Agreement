@@ -97,7 +97,8 @@ export class AppComponent {
 
     agree() {
         this.commentsService.agree(this.UUID, this.email, this.comment).subscribe((agree) => {
-            if (agree) {                
+            if (agree) {
+                this.comment = "";
                 this.lockForm();
                 this.getComments();
             }

@@ -90,6 +90,7 @@ var AppComponent = (function () {
         var _this = this;
         this.commentsService.agree(this.UUID, this.email, this.comment).subscribe(function (agree) {
             if (agree) {
+                _this.comment = "";
                 _this.lockForm();
                 _this.getComments();
             }
