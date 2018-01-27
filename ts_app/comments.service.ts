@@ -30,7 +30,7 @@ export class CommentsService {
 
     isAgreementAvailable(id:string, email:string):Observable<boolean> {
         return this.http.get(this.configData.isAgreementAvailableURL + id + "/" + email).map(
-            res => res.json()
+            res => (res._body == "{true}")
         );
     }
     agree(id:string, email:string, comment:string):Observable<boolean> {
@@ -38,7 +38,7 @@ export class CommentsService {
                    ' "email": "' + email + '"' + 
                    ' "comment": "' + comment + '"}';
         return this.http.post(this.configData.agreeURL, jdoc).map(
-            res => res.json()
+            res => (res._body == "{true}")
         );
     }
 
@@ -47,7 +47,7 @@ export class CommentsService {
                    ' "email": "' + email + '"' + 
                    ' "comment": "' + comment + '"}';
         return this.http.post(this.configData.disagreeURL, jdoc).map(
-            res => res.json()
+            res => (res._body == "{true}")
         );
     }
     
