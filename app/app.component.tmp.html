@@ -11,7 +11,7 @@
                     <th width="25%"></th>
                 </tr>
             </thead>
-            <tbody id="projects-table">
+            <tbody id="docs-table">
                 <tr *ngFor="let doc of documents">
                     <td>{{doc.id}}</td>
                     <td>{{doc.name}}</td>
@@ -35,7 +35,7 @@
                         <th width="15%">Статус</th>
                     </tr>
                 </thead>
-                <tbody id="projects-table">
+                <tbody id="comments-table">
                     <tr *ngFor="let comment of comments">
                         <td>{{comment.id}}</td>
                         <td>{{comment.date}}</td>
