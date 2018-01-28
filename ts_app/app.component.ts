@@ -127,7 +127,4 @@ export class AppComponent {
         $("#disagree-btn").attr("disabled", false);
     }
 
-    onDocClick(doc: Document) {
-        window.location = doc.link;
-    }
 }
