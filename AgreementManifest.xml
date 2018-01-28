@@ -45,7 +45,7 @@
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
     <Rule xsi:type="RuleCollection" Mode="And">
       <Rule xsi:type="ItemHasRegularExpressionMatch" PropertyName="SenderSMTPAddress" RegExName="EmailFilter" RegExValue="^1c@7INTEC.RU$" IgnoreCase="true" />
-      <Rule xsi:type="ItemHasRegularExpressionMatch" PropertyName="Subject" RegExName="SubjectFilter" RegExValue=".*труд.*" IgnoreCase="true" />
+      <Rule xsi:type="ItemHasRegularExpressionMatch" PropertyName="Subject" RegExName="SubjectFilter" RegExValue=".*утвержден.*" IgnoreCase="true" />
     </Rule>
   </Rule>
   <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
