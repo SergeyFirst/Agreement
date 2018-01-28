@@ -115,6 +115,9 @@ var AppComponent = (function () {
         $("#agree-btn").attr("disabled", false);
         $("#disagree-btn").attr("disabled", false);
     };
+    AppComponent.prototype.onDocClick = function (doc) {
+        window.location = doc.link;
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([

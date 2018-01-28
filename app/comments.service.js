@@ -18,25 +18,40 @@ var CommentsService = (function () {
         this.configData = new config_1.ConfigData;
     }
     CommentsService.prototype.getComments = function (id, email) {
-        return this.http.get(this.configData.commentsURL + id + "/" + email).map(function (res) { return res.json(); });
+        var headers = new http_1.Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        return this.http.get(this.configData.commentsURL + id + "/" + email, { headers: headers }).map(function (res) { return res.json(); });
     };
     CommentsService.prototype.getDocuments = function (id, email) {
-        return this.http.get(this.configData.documentsURL + id + "/" + email).map(function (res) { return res.json(); });
+        var headers = new http_1.Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        return this.http.get(this.configData.documentsURL + id + "/" + email, { headers: headers }).map(function (res) { return res.json(); });
     };
     CommentsService.prototype.isAgreementAvailable = function (id, email) {
-        return this.http.get(this.configData.isAgreementAvailableURL + id + "/" + email).map(function (res) { return (res._body == "{true}"); });
+        var headers = new http_1.Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        return this.http.get(this.configData.isAgreementAvailableURL + id + "/" + email, { headers: headers }).map(function (res) { return (res._body == "{true}"); });
     };
     CommentsService.prototype.agree = function (id, email, comment) {
+        var headers = new http_1.Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
         var jdoc = '{"id": "' + id + '"' +
             ' "email": "' + email + '"' +
             ' "comment": "' + comment + '"}';
-        return this.http.post(this.configData.agreeURL, jdoc).map(function (res) { return (res._body == "{true}"); });
+        return this.http.post(this.configData.agreeURL, jdoc, { headers: headers }).map(function (res) { return (res._body == "{true}"); });
     };
     CommentsService.prototype.disagree = function (id, email, comment) {
+        var headers = new http_1.Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
         var jdoc = '{"id": "' + id + '"' +
             ' "email": "' + email + '"' +
             ' "comment": "' + comment + '"}';
-        return this.http.post(this.configData.disagreeURL, jdoc).map(function (res) { return (res._body == "{true}"); });
+        return this.http.post(this.configData.disagreeURL, jdoc, { headers: headers }).map(function (res) { return (res._body == "{true}"); });
     };
     return CommentsService;
 }());
