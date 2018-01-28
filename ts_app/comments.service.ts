@@ -17,36 +17,56 @@ export class CommentsService {
     }
 
     getComments(id:string, email:string):Observable<Comment[]> {
-        return this.http.get(this.configData.commentsURL + id + "/" + email).map(
+        let headers: Headers = new Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+        return this.http.get(this.configData.commentsURL + id + "/" + email, {headers: headers}).map(
             res => res.json()
         );
     }
 
     getDocuments(id:string, email:string):Observable<Document[]> {
-        return this.http.get(this.configData.documentsURL + id + "/" + email).map(
+        let headers: Headers = new Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+        return this.http.get(this.configData.documentsURL + id + "/" + email, {headers: headers}).map(
             res => res.json()
         );
     }
 
     isAgreementAvailable(id:string, email:string):Observable<boolean> {
-        return this.http.get(this.configData.isAgreementAvailableURL + id + "/" + email).map(
+        let headers: Headers = new Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+        return this.http.get(this.configData.isAgreementAvailableURL + id + "/" + email, {headers: headers}).map(
             res => (res._body == "{true}")
         );
     }
     agree(id:string, email:string, comment:string):Observable<boolean> {
+        let headers: Headers = new Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+
         let jdoc = '{"id": "' + id + '"' +
                    ' "email": "' + email + '"' + 
                    ' "comment": "' + comment + '"}';
-        return this.http.post(this.configData.agreeURL, jdoc).map(
+        return this.http.post(this.configData.agreeURL, jdoc, {headers: headers}).map(
             res => (res._body == "{true}")
         );
     }
 
     disagree(id:string, email:string, comment:string):Observable<boolean> {
+        let headers: Headers = new Headers();
+        headers.append("Authorization", "Basic " + btoa("web" + ":" + "123"));
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+
         let jdoc = '{"id": "' + id + '"' +
                    ' "email": "' + email + '"' + 
                    ' "comment": "' + comment + '"}';
-        return this.http.post(this.configData.disagreeURL, jdoc).map(
+        return this.http.post(this.configData.disagreeURL, jdoc, {headers: headers}).map(
             res => (res._body == "{true}")
         );
     }
